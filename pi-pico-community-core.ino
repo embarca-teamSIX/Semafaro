@@ -1,5 +1,6 @@
-#include "Arduino.h"
+#include "pico/stdlib.h"
 #include "hardware/timer.h"
+
 
 // Definição dos pinos dos LEDs
 #define LED_VERMELHO 11
