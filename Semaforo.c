@@ -1,3 +1,4 @@
+#include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "hardware/timer.h"
 
@@ -5,18 +6,6 @@
 #define LED_VERMELHO 11
 #define LED_AMARELO 12
 #define LED_VERDE 13
-
-// Definição de true e false para o ambiente C
-#ifndef true
-#define true 1
-#endif
-
-#ifndef false
-#define false 0
-#endif
-
-// Definição do tipo bool (caso o compilador não tenha)
-typedef int bool;
 
 // Variável para armazenar o estado atual do semáforo
 int estado = 0;
@@ -46,7 +35,9 @@ bool atualizar_semaforo(struct repeating_timer *t) {
     return true; // Mantém o timer ativo
 }
 
-void setup() {
+int main() {
+    stdio_init_all(); // Inicializa a comunicação UART (opcional)
+
     // Inicializa os pinos dos LEDs
     gpio_init(LED_VERMELHO);
     gpio_set_dir(LED_VERMELHO, GPIO_OUT);
@@ -58,9 +49,9 @@ void setup() {
     // Configura o temporizador para mudar o semáforo a cada 3 segundos
     static struct repeating_timer timer;
     add_repeating_timer_ms(3000, atualizar_semaforo, NULL, &timer);
-}
 
-void loop() {
-    // O loop principal pode ser mantido vazio, pois o timer gerencia os LEDs
-    sleep_ms(100);  // Espera para debouncing, se necessário
+    // Loop infinito
+    while (1) {
+        sleep_ms(100); // Pequena pausa para evitar consumo excessivo de CPU
+    }
 }
