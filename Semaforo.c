@@ -19,19 +19,19 @@ bool atualizar_semaforo(struct repeating_timer *t) {
     // Alterna o estado do semáforo
     switch (estado) {
         case 0:
-            gpio_put(LED_VERMELHO, 1);
-            estado = 1;
+            gpio_put(LED_VERMELHO, 1);  // Acende o LED vermelho
+            estado = 1;  // Muda para o próximo estado
             break;
         case 1:
-            gpio_put(LED_AMARELO, 1);
-            estado = 2;
+            gpio_put(LED_AMARELO, 1);  // Acende o LED amarelo
+            estado = 2;  // Muda para o próximo estado
             break;
         case 2:
-            gpio_put(LED_VERDE, 1);
-            estado = 0;
+            gpio_put(LED_VERDE, 1);  // Acende o LED verde
+            estado = 0;  // Muda para o primeiro estado
             break;
     }
-    return true; // Mantém o timer ativo
+    return true;  // Mantém o timer ativo
 }
 
 void setup() {
