@@ -8,7 +8,7 @@ visualizado na Figura 1. Nesta prática, será necessário simular
 os seguintes componentes (configuração sugerida está
 presente na Figura 2):
 
-![alt text](image-2.png)
+![alt text](image-2.png) 
 
 1) Microcontrolador Raspberry Pi Pico W.
 2) 03 LEDs (vermelho, amarelo e verde).
