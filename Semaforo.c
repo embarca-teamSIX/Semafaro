@@ -1,10 +1,22 @@
-#include "Arduino.h"
+#include "hardware/gpio.h"
 #include "hardware/timer.h"
 
 // Definição dos pinos dos LEDs
 #define LED_VERMELHO 11
 #define LED_AMARELO 12
 #define LED_VERDE 13
+
+// Definição de true e false para o ambiente C
+#ifndef true
+#define true 1
+#endif
+
+#ifndef false
+#define false 0
+#endif
+
+// Definição do tipo bool (caso o compilador não tenha)
+typedef int bool;
 
 // Variável para armazenar o estado atual do semáforo
 int estado = 0;
@@ -19,24 +31,22 @@ bool atualizar_semaforo(struct repeating_timer *t) {
     // Alterna o estado do semáforo
     switch (estado) {
         case 0:
-            gpio_put(LED_VERMELHO, 1);  // Acende o LED vermelho
-            estado = 1;  // Muda para o próximo estado
+            gpio_put(LED_VERMELHO, 1);
+            estado = 1;
             break;
         case 1:
-            gpio_put(LED_AMARELO, 1);  // Acende o LED amarelo
-            estado = 2;  // Muda para o próximo estado
+            gpio_put(LED_AMARELO, 1);
+            estado = 2;
             break;
         case 2:
-            gpio_put(LED_VERDE, 1);  // Acende o LED verde
-            estado = 0;  // Muda para o primeiro estado
+            gpio_put(LED_VERDE, 1);
+            estado = 0;
             break;
     }
-    return true;  // Mantém o timer ativo
+    return true; // Mantém o timer ativo
 }
 
 void setup() {
-    Serial.begin(115200);  // Inicia a comunicação serial (opcional para debug)
-    
     // Inicializa os pinos dos LEDs
     gpio_init(LED_VERMELHO);
     gpio_set_dir(LED_VERMELHO, GPIO_OUT);
@@ -52,5 +62,5 @@ void setup() {
 
 void loop() {
     // O loop principal pode ser mantido vazio, pois o timer gerencia os LEDs
-    delay(100);
+    sleep_ms(100);  // Espera para debouncing, se necessário
 }
