@@ -4,7 +4,8 @@
       "name": "Pico",
       "includePath": [
         "${workspaceFolder}/**",
-        "C:/Users/55779/pico-sdk/**"
+        "C:/Users/55779/pico-sdk/**",
+        "C:/Users/55779/.platformio/packages/framework-arduino-pico/cores/arduino"  // Caminho correto para o framework do RP2040
       ],
       "defines": [],
       "compilerPath": "C:/Users/55779/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-gcc.exe",
@@ -15,4 +16,3 @@
   ],
   "version": 4
 }
-
